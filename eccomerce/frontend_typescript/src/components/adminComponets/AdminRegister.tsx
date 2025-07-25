@@ -82,6 +82,16 @@ const AdminRegister = () => {
       >
         {submitting ? "Signing Up..." : "Sign Up"}
       </button>
+      <br />
+      <p className="text-sm text-center mt-4">
+          Have an account?{" "}
+          <a
+            href="/admin/login"
+            className="text-blue-700 font-semibold hover:underline"
+          >
+            Login
+          </a>
+        </p>
     </form>
   );
 };

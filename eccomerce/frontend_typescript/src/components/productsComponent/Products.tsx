@@ -63,7 +63,7 @@ const Products: React.FC = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-6 bg-gray-300 min-h-screen">
       <h2 className="text-3xl font-bold mb-4">All Products</h2>
       <button
         className="bg-blue-600 text-white px-4 py-2 rounded m-2.5 hover:bg-blue-400 hover:text-2xl transition-all duration-500 ease-in-out"
@@ -72,14 +72,14 @@ const Products: React.FC = () => {
         Add Products
       </button>
 
-      <div className="bg-white p-4 rounded-md shadow-md">
+      <div className=" p-4 rounded-md shadow-md bg-gray-400">
         {loading ? (
           <div className="text-gray-400 text-center">Loading...</div>
         ) : products.length === 0 ? (
           <div className="text-gray-400 text-center">No products found.</div>
         ) : (
-          <table className="w-full text-left">
-            <thead>
+          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th className="border-b pb-2">Name</th>
                 <th className="border-b pb-2">price</th>
@@ -89,7 +89,7 @@ const Products: React.FC = () => {
             </thead>
             <tbody>
               {products.map((product) => (
-                <tr key={product.id}>
+                <tr key={product.id}  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                   <td className="py-1">{product.name}</td>
                   <td>{product.price}</td>
                   <td>{product.stock}</td>
@@ -118,3 +118,6 @@ const Products: React.FC = () => {
 };
 
 export default Products;
+
+
+

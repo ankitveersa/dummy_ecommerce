@@ -83,8 +83,19 @@ const AdminLogin = () => {
         className="bg-blue-700 text-white px-4 py-2 rounded w-full"
         disabled={submitting}
       > */}
+      
         {submitting ? "Verifying..." : "Login"}
       </button>
+      <br></br>
+      <p className="text-sm text-center mt-4">
+          Don’t have an account?{" "}
+          <a
+            href="/admin/register"
+            className="text-blue-700 font-semibold hover:underline"
+          >
+            REGISTER
+          </a>
+        </p>
     </form>
   );
 };
