@@ -15,9 +15,12 @@ services:
       dockerfile: Dockerfile
     container_name: frontend_service
     ports:
-      - "5173:80"
+      - "5173:5173"
     networks:
       - iomsnetwork
+    volumes:
+      - ./frontend_typescript:/app
+      - /app/node_modules
 
 networks:
   iomsnetwork:

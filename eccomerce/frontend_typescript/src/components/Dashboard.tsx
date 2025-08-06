@@ -22,7 +22,7 @@ const fetchMonthlyOrderCount = () => {
 
        axios.get("http://localhost:8000/api/products/top-selling/" ,{
       headers: {
-        "Authorization": `Token ${localStorage.getItem("token")}`
+        "Authorization": `Token ${sessionStorage.getItem("token")}`
       }
     })
       .then(res => {
@@ -31,7 +31,7 @@ const fetchMonthlyOrderCount = () => {
       });
     axios.get("http://localhost:8000/api/orders/count-this-month/", {
       headers: {
-        Authorization: `Token ${localStorage.getItem("token")}`,
+        Authorization: `Token ${sessionStorage.getItem("token")}`,
       },
     })
     .then((res) => {
@@ -45,7 +45,7 @@ const fetchMonthlyOrderCount = () => {
   const fetchLowStockProducts = () => {
      axios.get("http://localhost:8000/api/products/low-stock/", {
       headers: {
-        Authorization: `Token ${localStorage.getItem("token")}`,
+        Authorization: `Token ${sessionStorage.getItem("token")}`,
       },
     })
     .then((res) => {
@@ -60,7 +60,7 @@ const fetchMonthlyOrderCount = () => {
 const fetchTotalRevenue = () => {
   axios.get("http://localhost:8000/api/orders/total-revenue/", {
     headers: {
-      Authorization: `Token ${localStorage.getItem("token")}`,
+      Authorization: `Token ${sessionStorage.getItem("token")}`,
     },
   })
   .then((res) => {
@@ -74,7 +74,7 @@ const fetchTotalRevenue = () => {
 const fetchTopProducts = () => {
   axios.get("http://localhost:8000/api/products/top-selling/" ,{
       headers: {
-        "Authorization": `Token ${localStorage.getItem("token")}`
+        "Authorization": `Token ${sessionStorage.getItem("token")}`
       }
     })
       .then(res => {
