@@ -13,10 +13,14 @@ interface Product {
  
 const Dashboard = () => {
   const [topProducts, setTopProducts] = useState<Product[]>([]);
+  const [lowStockProducts, setLowStockProducts] = useState<Product[]>([]);
   const [monthlyOrderCount, setMonthlyOrderCount] = useState<number | null>(null);
+  const [totalRevenue, setTotalRevenue] = useState<number>(0);
 
-  useEffect(() => {
-    axios.get("http://localhost:8000/api/products/top-selling/" ,{
+
+const fetchMonthlyOrderCount = () => {
+
+       axios.get("http://localhost:8000/api/products/top-selling/" ,{
       headers: {
         "Authorization": `Token ${localStorage.getItem("token")}`
       }
@@ -36,27 +40,24 @@ const Dashboard = () => {
     .catch((err) => {
       console.error("Error fetching monthly order count:", err);
     });
-}, []);
+  }
 
-const [lowStockProducts, setLowStockProducts] = useState<Product[]>([]);
+  const fetchLowStockProducts = () => {
+     axios.get("http://localhost:8000/api/products/low-stock/", {
+      headers: {
+        Authorization: `Token ${localStorage.getItem("token")}`,
+      },
+    })
+    .then((res) => {
+      setLowStockProducts(res.data);
+    })
+    .catch((err) => {
+      console.error("Error fetching low stock products:", err);
+    });
+  }
+  
 
-useEffect(() => {
-  axios.get("http://localhost:8000/api/products/low-stock/", {
-    headers: {
-      Authorization: `Token ${localStorage.getItem("token")}`,
-    },
-  })
-  .then((res) => {
-    setLowStockProducts(res.data);
-  })
-  .catch((err) => {
-    console.error("Error fetching low stock products:", err);
-  });
-}, []);
-
-const [totalRevenue, setTotalRevenue] = useState<number>(0);
-
-useEffect(() => {
+const fetchTotalRevenue = () => {
   axios.get("http://localhost:8000/api/orders/total-revenue/", {
     headers: {
       Authorization: `Token ${localStorage.getItem("token")}`,
@@ -68,8 +69,30 @@ useEffect(() => {
   .catch((err) => {
     console.error("Failed to fetch total revenue:", err);
   });
-}, []);
+}
 
+const fetchTopProducts = () => {
+  axios.get("http://localhost:8000/api/products/top-selling/" ,{
+      headers: {
+        "Authorization": `Token ${localStorage.getItem("token")}`
+      }
+    })
+      .then(res => {
+        console.log("Top products:", res.data);
+        setTopProducts(res.data);
+      })
+      .catch((err) => {
+      console.error("Error fetching monthly order count:", err);
+      });
+ }
+
+
+  useEffect(() => {
+      fetchMonthlyOrderCount();
+      fetchLowStockProducts();
+      fetchTotalRevenue();
+      fetchTopProducts
+  }, []);
  
   return (
     <>

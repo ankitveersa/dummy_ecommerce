@@ -35,7 +35,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['get'], url_path='low-stock')
     def low_stock(self, request):
-        threshold = 10 # You can make this dynamic if needed
+        threshold = 10
         low_stock_products = Product.objects.filter(stock__lt=threshold)
         serializer = self.get_serializer(low_stock_products, many=True)
         return Response(serializer.data)

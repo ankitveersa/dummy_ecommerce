@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 // const navigate = useNavigate();
@@ -27,6 +27,7 @@ interface Order {
 const OrderDetails: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [updatingStatusId, setUpdatingStatusId] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
 
@@ -69,6 +70,7 @@ const OrderDetails: React.FC = () => {
         setUpdatingStatusId(null);
       });
   };
+
   const getNextStatuses = (currentStatus: string): string[] => {
     const transitions: { [key: string]: string[] } = {
       PENDING: ["PENDING", "PROCESSING", "CANCELED"],
@@ -80,8 +82,6 @@ const OrderDetails: React.FC = () => {
     return transitions[currentStatus] || [currentStatus];
   };
 
-
-
   const calculateTotal = (items: OrderItem[]) => {
     return items.reduce((total, item) => {
       const price = parseFloat(item.product.price);
@@ -92,6 +92,12 @@ const OrderDetails: React.FC = () => {
   return (
     <div className="p-4 max-w-3xl mx-auto">
       <h2 className="text-2xl font-bold mb-4">All Orders</h2>
+      <button
+        className="bg-blue-600 text-white px-4 py-2 rounded m-2.5 hover:bg-blue-400 hover:text-2xl transition-all duration-500 ease-in-out"
+        onClick={() => navigate("/orders/add")}
+      >
+        Add Orders
+      </button>
 
       {orders.length === 0 ? (
         <p>No orders found.</p>
@@ -132,7 +138,6 @@ const OrderDetails: React.FC = () => {
                       ₹{(parseFloat(item.product.price) * item.quantity).toFixed(2)}
                     </td>
                     <td className="px-2 py-1 border">
-                      {/* {order.status}{" "} {"    "} */}
                       <select
                         value={order.status}
                         disabled={updatingStatusId === order.id}
