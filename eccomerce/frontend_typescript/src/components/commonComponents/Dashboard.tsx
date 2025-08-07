@@ -2,6 +2,12 @@ import { useEffect ,useState } from "react";
 
 import axios from "axios";
 
+import { useContext } from "react";
+import { MonthlyOrderCountContext } from "../../context/orders-count";
+
+
+
+
 interface Product {
   id: number;
   name: string;
@@ -14,9 +20,10 @@ interface Product {
 const Dashboard = () => {
   const [topProducts, setTopProducts] = useState<Product[]>([]);
   const [lowStockProducts, setLowStockProducts] = useState<Product[]>([]);
-  const [monthlyOrderCount, setMonthlyOrderCount] = useState<number | null>(null);
+  // const [monthlyOrderCount, setMonthlyOrderCount] = useState<number | null>(null);
   const [totalRevenue, setTotalRevenue] = useState<number>(0);
 
+  const { monthlyOrderCount , setMonthlyOrderCount} = useContext(MonthlyOrderCountContext);
 
 const fetchMonthlyOrderCount = () => {
 
@@ -91,7 +98,7 @@ const fetchTopProducts = () => {
       fetchMonthlyOrderCount();
       fetchLowStockProducts();
       fetchTotalRevenue();
-      fetchTopProducts
+      fetchTopProducts();
   }, []);
  
   return (
