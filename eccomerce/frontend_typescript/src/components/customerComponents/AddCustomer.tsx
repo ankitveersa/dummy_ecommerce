@@ -1,7 +1,7 @@
 import  React,{ useState  } from "react";
 import axios from "axios";
 
-const API_BASE = "http://localhost:8000/api";
+const API_BASE = import.meta.env.VITE_API_BASE_URL ;
 
 interface CustomerForm {
   first_name: string;
@@ -49,46 +49,59 @@ const AddCustomer = () => {
   };
 
   return (
-    <form className="max-w-md mx-auto mt-8 p-4 bg-white rounded shadow" onSubmit={handleSubmit}>
+    <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
+
+      <br/>
+      <h1 className="text-3xl font-bold mb-6 text-center">Add Customer</h1>
+
+      <label className="block text-sm font-medium text-black mb-1 text-left">First Name</label>
       <input
         type="text"
         name="first_name"
         placeholder="First Name"
         value={form.first_name}
         onChange={handleChange}
-        className="border p-2 rounded w-full mb-2"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         required
       />
+
+      <label className="block text-sm font-medium text-black mb-1 text-left">Last Name</label>
       <input
         type="text"
         name="last_name"
         placeholder="Last Name"
         value={form.last_name}
         onChange={handleChange}
-        className="border p-2 rounded w-full mb-2"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         required
       />
+
+      <label className="block text-sm font-medium text-black mb-1 text-left">Email</label>
       <input
         type="email"
         name="email"
         placeholder="Email"
         value={form.email}
         onChange={handleChange}
-        className="border p-2 rounded w-full mb-2"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         required
       />
+
+      <label className="block text-sm font-medium text-black mb-1 text-left">Phone Number</label>
       <input
         type="text"
         name="phone_number"
         placeholder="Phone Number"
         value={form.phone_number}
         onChange={handleChange}
-        className="border p-2 rounded w-full mb-2"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         required
       />
+
+      <br/>
       <button
         type="submit"
-        className="bg-blue-700 text-white px-4 py-2 rounded w-full"
+        className="bg-blue-700 text-white px-4 py-2 rounded-2xl"
         disabled={submitting}
       >
         {submitting ? "Adding..." : "Add Customer"}

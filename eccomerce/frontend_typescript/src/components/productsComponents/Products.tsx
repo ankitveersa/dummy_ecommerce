@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const API_BASE = "http://localhost:8000/api";
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL ;
 
 // Define the shape of a Customer
 interface Product {
@@ -36,6 +37,11 @@ const Products: React.FC = () => {
       })
       .catch((err) => {
         console.error("Failed to fetch products:", err);
+        if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+          alert("You are not authorized. Please log in.");
+          navigate("/admin/login");
+          return;
+        }
         setLoading(false);
       });
   };

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 
-const API_BASE = "http://localhost:8000/api";
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL ;
 
 interface Product {
   id: number;
@@ -105,7 +106,7 @@ const AddOrder: React.FC = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8000/api/orders/", {
+      const response = await fetch(`${API_BASE}/orders/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -2,7 +2,7 @@ import  React,{ useState  } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_BASE = "http://localhost:8000/api";
+const API_BASE = import.meta.env.VITE_API_BASE_URL ;
 
 interface CustomerForm {
   username: string;
@@ -33,7 +33,7 @@ const AdminLogin = () => {
           username: "",
           password: ""
         });
-        navigate("/customer");
+        navigate("/");
 
       })
       .catch((err: any) => {

@@ -1,7 +1,8 @@
 import  React,{ useState  } from "react";
 import axios from "axios";
 
-const API_BASE = "http://localhost:8000/api";
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL ;
 
 interface CustomerForm {
   username: string;
@@ -27,7 +28,7 @@ const AdminRegister = () => {
     axios
       .post(`${API_BASE}/users/`, { user: form })
       .then(() => {
-        alert("Customer added!");
+        alert("Admin added!");
         setForm({
           username: "",
           email: "",
@@ -47,37 +48,48 @@ const AdminRegister = () => {
   };
 
   return (
-    <form className="max-w-md mx-auto mt-8 p-4 bg-white rounded shadow" onSubmit={handleSubmit}>
+    <form className="max-w-md mx-auto " onSubmit={handleSubmit}>
+
+      <br/>
+      <h1 className="text-3xl font-bold mb-6 text-center">Register</h1>
+
+      <label className="block text-sm font-medium text-black mb-1 text-left">Username</label>
       <input
         type="text"
         name="username"
         placeholder="username"
         value={form.username}
         onChange={handleChange}
-        className="border p-2 rounded w-full mb-2"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         required
       />
+
+      <label className="block text-sm font-medium text-black mb-1 text-left">Email</label>
       <input
         type="email"
         name="email"
         placeholder="Email"
         value={form.email}
         onChange={handleChange}
-        className="border p-2 rounded w-full mb-2"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         required
       />
+
+      <label className="block text-sm font-medium text-black mb-1 text-left">Password</label>
       <input
         type="password"
         name="password"
         placeholder="*****"
         value={form.password}
         onChange={handleChange}
-        className="border p-2 rounded w-full mb-2"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         required
       />
+
+      <br/>
       <button
         type="submit"
-        className="bg-blue-700 text-white px-4 py-2 rounded w-full"
+        className="bg-blue-700 text-white px-4 py-2 rounded-2xl "
         disabled={submitting}
       >
         {submitting ? "Signing Up..." : "Sign Up"}

@@ -25,18 +25,10 @@ const Dashboard = () => {
 
   const { monthlyOrderCount , setMonthlyOrderCount} = useContext(MonthlyOrderCountContext);
 
-const fetchMonthlyOrderCount = () => {
+  const API_BASE = import.meta.env.VITE_API_BASE_URL ;
 
-       axios.get("http://localhost:8000/api/products/top-selling/" ,{
-      headers: {
-        "Authorization": `Token ${sessionStorage.getItem("token")}`
-      }
-    })
-      .then(res => {
-        console.log("Top products:", res.data);
-        setTopProducts(res.data);
-      });
-    axios.get("http://localhost:8000/api/orders/count-this-month/", {
+  const fetchMonthlyOrderCount = () => {
+    axios.get(`${API_BASE}/orders/count-this-month/`, {
       headers: {
         Authorization: `Token ${sessionStorage.getItem("token")}`,
       },
@@ -50,7 +42,7 @@ const fetchMonthlyOrderCount = () => {
   }
 
   const fetchLowStockProducts = () => {
-     axios.get("http://localhost:8000/api/products/low-stock/", {
+     axios.get(`${API_BASE}/products/low-stock/`, {
       headers: {
         Authorization: `Token ${sessionStorage.getItem("token")}`,
       },
@@ -65,7 +57,7 @@ const fetchMonthlyOrderCount = () => {
   
 
 const fetchTotalRevenue = () => {
-  axios.get("http://localhost:8000/api/orders/total-revenue/", {
+  axios.get(`${API_BASE}/orders/total-revenue/`, {
     headers: {
       Authorization: `Token ${sessionStorage.getItem("token")}`,
     },
@@ -79,7 +71,7 @@ const fetchTotalRevenue = () => {
 }
 
 const fetchTopProducts = () => {
-  axios.get("http://localhost:8000/api/products/top-selling/" ,{
+  axios.get(`${API_BASE}/products/top-selling/` ,{
       headers: {
         "Authorization": `Token ${sessionStorage.getItem("token")}`
       }

@@ -1,7 +1,7 @@
 import  React,{ useState  } from "react";
 import axios from "axios";
 
-const API_BASE = "http://localhost:8000/api";
+const API_BASE = import.meta.env.VITE_API_BASE_URL ;
 
 interface ProductForm {
   name: string;
@@ -50,47 +50,58 @@ const AddProduct = () => {
   };
 
   return (
-    <form className="max-w-md mx-auto mt-8 p-4 bg-white rounded shadow" onSubmit={handleSubmit}>
+    <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
+      <br/>
+      <h1 className="text-3xl font-bold mb-6 text-center">Add Product</h1>
+
+      <label className="block text-sm font-medium text-black mb-1 text-left">Product Name</label>
       <input
         type="text"
         name="name"
         placeholder="Product name"
         value={form.name}
         onChange={handleChange}
-        className="border p-2 rounded w-full mb-2"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         required
       />
 
+      <label className="block text-sm font-medium text-black mb-1 text-left">Price</label>
       <input
         type="text"
         name="price"
         placeholder="100"
         value={form.price}
         onChange={handleChange}
-        className="border p-2 rounded w-full mb-2"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         required
       />
+
+      <label className="block text-sm font-medium text-black mb-1 text-left">Description</label>
       <input
         type="textbox"
         name="description"
         placeholder="this is a product"
         value={form.description}
         onChange={handleChange}
-        className="border p-2 rounded w-full mb-2"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         required
       />
+
+      <label className="block text-sm font-medium text-black mb-1 text-left">Opening Stock</label>
       <input
         type="text"
         name="stock"
         placeholder="6"
         value={form.stock}
         onChange={handleChange}
-        className="border p-2 rounded w-full mb-2"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         required
       />
+
+      <br/>
       <button
         type="submit"
-        className="bg-blue-700 text-white px-4 py-2 rounded w-full"
+        className="bg-blue-700 text-white px-4 py-2 rounded-2xl"
         disabled={submitting}
       >
         {submitting ? "Adding..." : "Add Product"}

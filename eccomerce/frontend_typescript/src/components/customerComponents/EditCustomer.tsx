@@ -23,8 +23,10 @@ function EditCustomer() {
     const navigate = useNavigate();
     const [saving, setSaving] = useState<boolean>(false);
 
+    const API_BASE = import.meta.env.VITE_API_BASE_URL ;
+
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/customers/${id}/`,{
+        axios.get(`${API_BASE}/customers/${id}/`,{
             headers: {
                 Authorization: `Token ${sessionStorage.getItem("token")}`
             }
@@ -52,7 +54,7 @@ function EditCustomer() {
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault ();
         setSaving(true);
-        axios.put(`http://localhost:8000/api/customers/${id}/`, customer ,{
+        axios.put(`${API_BASE}/customers/${id}/`, customer ,{
             headers: { Authorization: `Token ${sessionStorage.getItem("token")}` }
         })
             .then(() => {
